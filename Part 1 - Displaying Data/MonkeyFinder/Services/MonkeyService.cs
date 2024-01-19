@@ -1,5 +1,13 @@
-﻿namespace MonkeyFinder.Services;
+﻿using MonkeyFinder.Interfaces.Services;
 
-public class MonkeyService
+namespace MonkeyFinder.Services;
+
+public class MonkeyService : IMonkeyService
 {
+    public async Task<IList<Monkey>> GetMonkeys()
+    {
+        IList<Monkey> monkeyList = new List<Monkey>();
+
+        return monkeyList;
+    }
 }
