@@ -1,24 +1,21 @@
 ﻿namespace MonkeyFinder.ViewModel;
 
-[INotifyPropertyChanged]
-public partial class BaseViewModel
+public partial class BaseViewModel : ObservableObject
 {
     #region Flds
 
     /// <summary>
     /// State to set the changes of the properties.
     /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNotBusy))]
     bool isBusy;
 
     /// <summary>
     /// Title of the UI interface.
     /// </summary>
+    [ObservableProperty]
     string title;
-
-    /// <summary>
-    /// INotifyPropertChanged implementation.
-    /// </summary>
-    public event PropertyChangedEventHandler PropertyChanged;
 
     #endregion Fdls
 
@@ -27,15 +24,14 @@ public partial class BaseViewModel
     /// <summary>
     /// State to set the oposite of isBusy.
     /// </summary>
-    //public bool IsNotBusy => !IsBusy;
+    public bool IsNotBusy => !IsBusy;
 
     #endregion Props
 
     #region Ctors
-
-    public BaseViewModel()
+    public BaseViewModel(string title)
     {
-
+        this.Title = title;
     }
     #endregion
 
