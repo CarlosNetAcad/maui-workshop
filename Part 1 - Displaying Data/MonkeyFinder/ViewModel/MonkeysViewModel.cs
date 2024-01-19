@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using MonkeyFinder.Interfaces.Services;
+﻿using MonkeyFinder.Interfaces.Services;
 
 namespace MonkeyFinder.ViewModel;
 
@@ -9,17 +8,16 @@ public partial class MonkeysViewModel : BaseViewModel
 
     public ObservableCollection<Monkey> Monkeys { get; set; }
 
-    public ICommand GetMonkeysCommand { get;  }
-
     public MonkeysViewModel(
         string title,
         IMonkeyService monkeyService
     ) : base(title)
     {
         this.monkeyService = monkeyService;
-        this.GetMonkeysCommand = new Command( async () => await GetMonkeysAsync() );
+
     }
 
+    [RelayCommand]
     async Task GetMonkeysAsync()
     {
         if (IsBusy) return;
