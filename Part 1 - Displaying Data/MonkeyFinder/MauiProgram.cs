@@ -22,10 +22,10 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<IMonkeyService>();
 
-		builder.Services.AddTransient<MonkeysViewModel>( vm => new MonkeysViewModel
+		builder.Services.AddTransient<MonkeysViewModel>( b => new MonkeysViewModel
 			(
 			"Monkey Finder",
-			vm.GetRequiredService<IMonkeyService>()
+			b.GetRequiredService<IMonkeyService>()
 			)
 		);
 
