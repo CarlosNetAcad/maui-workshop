@@ -21,6 +21,9 @@
 		<ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -48,9 +51,11 @@
 	<ItemGroup>
 	  <None Remove="Interfaces\" />
 	  <None Remove="Interfaces\Services\" />
+	  <None Remove="Constants\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Interfaces\" />
 	  <Folder Include="Interfaces\Services\" />
+	  <Folder Include="Constants\" />
 	</ItemGroup>
 </Project>

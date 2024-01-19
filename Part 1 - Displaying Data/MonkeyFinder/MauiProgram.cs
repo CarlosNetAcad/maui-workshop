@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MonkeyFinder.Constants;
 using MonkeyFinder.Interfaces.Services;
+using MonkeyFinder.Services;
 using MonkeyFinder.View;
 
 namespace MonkeyFinder;
@@ -20,17 +22,22 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		builder.Services.AddSingleton<IMonkeyService>();
-
-		builder.Services.AddTransient<MonkeysViewModel>( b => new MonkeysViewModel
-			(
-			"Monkey Finder",
-			b.GetRequiredService<IMonkeyService>()
-			)
-		);
-
-		builder.Services.AddSingleton<MainPage>();
+        Bootstrap( builder );
 
 		return builder.Build();
 	}
+
+    private static void Bootstrap( MauiAppBuilder builder)
+	{
+        builder.Services.AddSingleton<IMonkeyService>(b => new MonkeyService());
+
+        builder.Services.AddTransient<MonkeysViewModel>(b => new MonkeysViewModel
+            (
+            title: PageTitles.MONKEY_DASHBOARD,
+            b.GetRequiredService<IMonkeyService>()
+            )
+        );
+
+        builder.Services.AddSingleton<MainPage>();
+    }
 }
