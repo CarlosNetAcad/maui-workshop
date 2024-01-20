@@ -6,8 +6,7 @@ public partial class MonkeysViewModel : BaseViewModel
 {
     IMonkeyService monkeyService;
 
-    public ObservableCollection<Monkey> Monkeys { get; set; }
-
+    public ObservableCollection<Monkey> Monkeys { get; set; } = new ();
     public MonkeysViewModel(
         string title,
         IMonkeyService monkeyService
@@ -26,9 +25,9 @@ public partial class MonkeysViewModel : BaseViewModel
         {
             IsBusy = true;
 
-            var monkeysList = await monkeyService.GetMonkeys();
+            var monkeysList = await this.monkeyService.GetMonkeys();
 
-            if (Monkeys?.Count != 0) Monkeys.Clear();
+            if (Monkeys?.Count > 0) Monkeys?.Clear();
 
             foreach (var monkey in monkeysList)
                 Monkeys.Add(monkey);
@@ -37,7 +36,7 @@ public partial class MonkeysViewModel : BaseViewModel
         {
             Debug.WriteLine(ex);
 
-            await Shell.Current.DisplayAlert("Error!","Unable to get monkeys.", "OK");
+            await Shell.Current.DisplayAlert("Error!",ex.Message, "OK");
         }
         finally
         {
