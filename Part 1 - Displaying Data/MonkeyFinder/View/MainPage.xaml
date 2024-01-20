@@ -14,9 +14,7 @@
                  <CollectionView
                      BackgroundColor="Transparent"
                      Grid.ColumnSpan="2"
-                     ItemsSource="{Binding Monkeys}"
-                     SelectionChangedCommand="{Binding GoToDetailCommand}"
-                     SelectionChangedCommandParameter="{Binding .}"
+                     ItemsSource="{Binding Monkeys}"                     
                      SelectionMode="None">
                      <CollectionView.ItemTemplate>
                          <DataTemplate x:DataType="model:Monkey">
@@ -24,6 +22,13 @@
                                  <Frame
                                      HeightRequest="125"
                                      Padding="0">
+                                     <Frame.GestureRecognizers>
+                                         <TapGestureRecognizer
+                                             CommandParameter="{Binding .}"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"
+                                             />
+
+                                     </Frame.GestureRecognizers>
                                      <Grid Padding="0"
                                          ColumnDefinitions="125,*">
 
