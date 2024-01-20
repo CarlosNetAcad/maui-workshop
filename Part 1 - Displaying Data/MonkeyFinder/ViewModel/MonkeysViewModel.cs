@@ -4,9 +4,31 @@ namespace MonkeyFinder.ViewModel;
 
 public partial class MonkeysViewModel : BaseViewModel
 {
-    IMonkeyService monkeyService;
+    #region Flds
 
+    /// <summary>
+    /// Monkey service.
+    /// </summary>
+    /// 
+    IMonkeyService monkeyService;
+    #endregion
+
+    #region Props
+
+    /// <summary>
+    /// MonkeyList
+    /// </summary>
     public ObservableCollection<Monkey> Monkeys { get; set; } = new ();
+
+    #endregion
+
+    #region Ctors
+
+    /// <summary>
+    /// Main Ctor.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="monkeyService"></param>
     public MonkeysViewModel(
         string title,
         IMonkeyService monkeyService
@@ -15,6 +37,10 @@ public partial class MonkeysViewModel : BaseViewModel
         this.monkeyService = monkeyService;
 
     }
+
+    #endregion
+
+    #region Cmds
 
     [RelayCommand]
     async Task GetMonkeysAsync()
@@ -43,4 +69,18 @@ public partial class MonkeysViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
+    [RelayCommand]
+    async Task GoToDetailAsync(Monkey monkey)
+    {
+        if (monkey is null) return;
+
+        await Shell.Current.GoToAsync(
+            $"{nameof(DetailsPage)}",
+            true,
+            new Dictionary<string, object> { { "Monkey", monkey} }
+            );
+
+    }
+    #endregion
 }
