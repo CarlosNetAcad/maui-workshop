@@ -25,7 +25,7 @@
                                      <Frame.GestureRecognizers>
                                          <TapGestureRecognizer
                                              CommandParameter="{Binding .}"
-                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailsCommand}"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MonkeysViewModel}}, Path=GoToDetailCommand}"
                                              />
 
                                      </Frame.GestureRecognizers>
